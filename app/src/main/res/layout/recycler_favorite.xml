@@ -42,4 +42,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/addressTextView"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="8dp"
+        android:textColor="@android:color/black"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/favoriteImageView"
+        app:layout_constraintStart_toEndOf="@id/imageView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

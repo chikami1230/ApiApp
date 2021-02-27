@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
         FavoriteShop.delete(id)
         (viewPagerAdapter.fragments[VIEW_PAGER_POSITION_API] as ApiFragment).updateView()
         (viewPagerAdapter.fragments[VIEW_PAGER_POSITION_FAVORITE] as FavoriteFragment).updateData()
+
     }
 
     companion object {

@@ -60,6 +60,8 @@ class ApiAdapter(private val context: Context): RecyclerView.Adapter<RecyclerVie
         val imageView: ImageView = view.findViewById(R.id.imageView)
         // レイアウトファイルからidがfavoriteImageViewのImageViewオブジェクトを取得し、代入
         val favoriteImageView: ImageView = view.findViewById(R.id.favoriteImageView)
+        /// レイアウトファイルからidがadressTextViewのTextViewオブジェクトを取得し、代入
+        val addressTextView: TextView = view.findViewById(R.id.addressTextView)
     }
 
     override fun getItemCount(): Int {
