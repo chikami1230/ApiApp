@@ -10,6 +10,7 @@ open class FavoriteShop: RealmObject() {
     var imageUrl: String = ""
     var name: String = ""
     var url: String = ""
+    var address: String = ""
 
     companion object {
         fun findAll(): List<FavoriteShop> = // お気に入りのShopを全件取得
@@ -21,8 +22,8 @@ open class FavoriteShop: RealmObject() {
             }
 
         fun findBy(id: String): FavoriteShop? = // お気に入りされているShopをidで検索して返す。お気に入りに登録されていなければnullで返す
-            Realm.getDefaultInstance().use { realm ->
-                realm.where(FavoriteShop::class.java)
+            Realm.getDefaultInstance().use {
+                    realm -> realm.where(FavoriteShop::class.java)
                     .equalTo(FavoriteShop::id.name, id)
                     .findFirst()?.let {
                         realm.copyFromRealm(it)

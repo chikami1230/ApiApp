@@ -9,7 +9,9 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.squareup.picasso.Picasso
+
 
 class ApiAdapter(private val context: Context): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
@@ -92,11 +94,23 @@ class ApiAdapter(private val context: Context): RecyclerView.Adapter<RecyclerVie
                     onClickItem?.invoke(if (data.couponUrls.sp.isNotEmpty()) data.couponUrls.sp else data.couponUrls.pc)
                 }
             }
+
+
             // nameTextViewのtextプロパティに代入されたオブジェクトのnameプロパティを代入
             nameTextView.text = data.name
+            nameTextView.apply{
+            }
+
+            //追加
+            addressTextView.text = data.address
+            addressTextView.apply {
+            }
+
+
             // Picassoライブラリを使い、imageViewにdata.logoImageのurlの画像を読み込ませる
             Picasso.get().load(data.logoImage).into(imageView)
             // 白抜きの星マークの画像を指定
+            //課題で関わりそう
             favoriteImageView.apply {
                 setImageResource(if (isFavorite) R.drawable.ic_star else R.drawable.ic_star_border) // Picassoというライブラリを使ってImageVIewに画像をはめ込む
                 setOnClickListener {
@@ -110,4 +124,5 @@ class ApiAdapter(private val context: Context): RecyclerView.Adapter<RecyclerVie
             }
         }
     }
+
 }
