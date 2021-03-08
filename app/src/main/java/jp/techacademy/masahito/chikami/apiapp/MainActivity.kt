@@ -1,5 +1,6 @@
 package jp.techacademy.masahito.chikami.apiapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
@@ -16,6 +17,10 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val intent = Intent()
+        intent.action = Intent.ACTION_SEND
+
+
         // ViewPager2の初期化
         viewPager2.apply {
             adapter = viewPagerAdapter
@@ -31,8 +36,8 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
         }.attach()
     }
 
-    override fun onClickItem(url: String,  id: String, name:String) {   //クリックした時urlだけでなくお気に入りの情報も必要になった
-        WebViewActivity.start(this, url, id,name)
+    override fun onClickItem(url: String,  id: String ){   //クリックした時urlだけでなくお気に入りの情報も必要になった
+        WebViewActivity.start(this, url, id)
     }
 /*
 adress:String, name:String, imageUrl:String,

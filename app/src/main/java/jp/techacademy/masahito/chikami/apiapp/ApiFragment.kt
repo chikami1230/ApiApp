@@ -52,7 +52,7 @@ class ApiFragment: Fragment() {
             }
             // Itemをクリックしたとき
             onClickItem = {
-                fragmentCallback?.onClickItem(it,it,it)
+                fragmentCallback?.onClickItem(it,it)
             }
         }
         // RecyclerViewの初期化

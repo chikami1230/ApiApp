@@ -30,7 +30,7 @@ class WebViewActivity: AppCompatActivity() {
 
         var shopUrl = intent.getSerializableExtra(KEY_URL).toString()
         var shopId = intent.getSerializableExtra(KEY_ID).toString()
-        var shopName = intent.getSerializableExtra(KEY_NAME).toString()
+
         webView.loadUrl(shopUrl)
         val isFavorite =FavoriteShop.findBy(shopId)
 
@@ -55,7 +55,6 @@ class WebViewActivity: AppCompatActivity() {
                 //一覧とお気に入り画面への通知
                 Log.d("test",shopId +"←id表示")
                 Log.d("test",shopUrl +"←url表示")
-                Log.d("test",shopName)
             }
         }
     }
@@ -63,14 +62,12 @@ class WebViewActivity: AppCompatActivity() {
     companion object {
         private const val KEY_URL = "key_url"
         private const val KEY_ID = "key_id"
-        private const val KEY_NAME ="key_name"
 
-        fun start(activity: Activity, url:String, id:String,name:String ) {
+        fun start(activity: Activity, url:String, id:String ) {
             activity.startActivity(
                 Intent(activity, WebViewActivity::class.java)
                     .putExtra(KEY_URL, url)
-                    .putExtra(KEY_ID, id)
-                    .putExtra(KEY_NAME,name))
+                    .putExtra(KEY_ID, id))
 
 
         }
