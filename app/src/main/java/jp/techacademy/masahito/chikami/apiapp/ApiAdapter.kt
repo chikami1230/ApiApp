@@ -22,9 +22,11 @@ class ApiAdapter(private val context: Context): RecyclerView.Adapter<RecyclerVie
     var onClickAddFavorite: ((Shop) -> Unit)? = null
     // 一覧画面から削除するときのコールバック（ApiFragmentへ通知するメソッド)
     var onClickDeleteFavorite: ((Shop) -> Unit)? = null
-
     // Itemを押したときのメソッド
     var onClickItem: ((String) -> Unit)? = null
+    // Itemを押したときのメソッド
+    var onClickItem2: ((String) -> Unit)? = null
+
 
 
     // 表示リスト更新時に呼び出すメソッド

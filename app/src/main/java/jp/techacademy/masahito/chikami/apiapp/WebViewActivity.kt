@@ -53,8 +53,8 @@ class WebViewActivity: AppCompatActivity() {
                 FavoriteShop.insert(FavoriteShop())
                 //Realmへの登録処理
                 //一覧とお気に入り画面への通知
-                Log.d("test",shopId +"←id表示")
-                Log.d("test",shopUrl +"←url表示")
+                Log.d("test",shopId +"←id表示(WebView)")
+                Log.d("test",shopUrl +"←url表示(WebView)")
             }
         }
     }
@@ -63,16 +63,21 @@ class WebViewActivity: AppCompatActivity() {
         private const val KEY_URL = "key_url"
         private const val KEY_ID = "key_id"
 
-        fun start(activity: Activity, url:String, id:String ) {
-            activity.startActivity(
-                Intent(activity, WebViewActivity::class.java)
-                    .putExtra(KEY_URL, url)
-                    .putExtra(KEY_ID, id))
-
+        fun start(activity: Activity, url: String) {
+            activity.startActivity(Intent(activity,
+                WebViewActivity::class.java)
+                .putExtra(KEY_URL, url))
+        }
 
         }
+        fun start2(activity: Activity, id:String ) {
+            activity.startActivity(Intent(activity,
+                WebViewActivity::class.java)
+                .putExtra(KEY_ID, id))
+        }
+
     }
-}
+
 /*
 
  companion object{

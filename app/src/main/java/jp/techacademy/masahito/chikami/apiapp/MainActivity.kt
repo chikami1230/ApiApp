@@ -3,6 +3,7 @@ package jp.techacademy.masahito.chikami.apiapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -36,9 +37,17 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
         }.attach()
     }
 
-    override fun onClickItem(url: String,  id: String ){   //クリックした時urlだけでなくお気に入りの情報も必要になった
-        WebViewActivity.start(this, url, id)
+    override fun onClickItem(url: String){
+        WebViewActivity.start(this, url)
+        Log.d("test",url+"←url(MainActivity)")
     }
+
+    override fun onClickItem2(id: String){
+        WebViewActivity.start(this, id)
+        Log.d("test",id+"←id表示したい(MainActivity)")
+    }
+
+
 /*
 adress:String, name:String, imageUrl:String,
 , name, imageUrl, address
@@ -66,6 +75,7 @@ adress:String, name:String, imageUrl:String,
             .setMessage(R.string.delete_favorite_dialog_message)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 deleteFavorite(id)
+                Log.d("test",id + "←id表示(MainActivityのAlertDialogから)")
             }
             .setNegativeButton(android.R.string.cancel) { _, _ ->}
             .create()

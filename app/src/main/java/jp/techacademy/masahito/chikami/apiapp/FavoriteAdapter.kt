@@ -22,6 +22,9 @@ class FavoriteAdapter(private val context: Context): RecyclerView.Adapter<Recycl
     // Itemを押したときのメソッド
     var onClickItem: ((String) -> Unit)? = null
 
+    // Item2を押したときのメソッド
+    var onClickItem2: ((String) -> Unit)? = null
+
     // 更新用のメソッド
     fun refresh(list: List<FavoriteShop>) {
         items.apply {

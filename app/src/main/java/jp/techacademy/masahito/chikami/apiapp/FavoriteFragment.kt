@@ -35,8 +35,12 @@ class FavoriteFragment: Fragment() {
             }
             // Itemをクリックしたとき
             onClickItem = {
-                fragmentCallback?.onClickItem(it,it)
+                fragmentCallback?.onClickItem(it)
             }
+            onClickItem2 = {
+                fragmentCallback?.onClickItem(it)
+            }
+
 
 
         }
