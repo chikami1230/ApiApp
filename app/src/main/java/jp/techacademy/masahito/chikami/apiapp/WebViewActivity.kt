@@ -4,12 +4,14 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.util.Log.i
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
+import com.google.gson.Gson
 import com.squareup.picasso.Picasso
 import io.realm.Realm
 import jp.techacademy.masahito.chikami.apiapp.FavoriteShop.Companion.findBy
@@ -20,45 +22,86 @@ import jp.techacademy.masahito.chikami.apiapp.FavoriteAdapter.FavoriteItemViewHo
 
 class WebViewActivity: AppCompatActivity() {
 
-    var id: String = ""
-    var imageUrl: String = ""
-    var name: String = ""
-    var url: String = ""
-    var address: String = ""
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_view)
-        webView.loadUrl(intent.getStringExtra(KEY_URL).toString())
+
+        //開いた時にお気に入りか否か表示必要
+
+        var shopUrl = intent.getSerializableExtra(KEY_URL).toString()
+        var shopId = intent.getSerializableExtra(KEY_ID).toString()
+        var shopName = intent.getSerializableExtra(KEY_NAME).toString()
+        webView.loadUrl(shopUrl)
+        val isFavorite =FavoriteShop.findBy(shopId)
+
+        if(isFavorite != null){      //idが登録されているなら
+            favoriteImageView.setImageResource(R.drawable.ic_star_border)  //白い星マークへ変更
+        }else {  //お気に入り登録されてないなら
+            favoriteImageView.setImageResource(R.drawable.ic_star)  //黄色星マークへ変更
+        }
 
         favoriteImageView.setOnClickListener{  //リスナーは反応する
             Log.d("test","1")
-            if(){  //白星にはなるけど黄色に戻らない理由は,ここで白星になっても通知していなくて,Shopの中身は変わらず消えていないから,元々のお気に入り状態のまま?
+            if(isFavorite != null){      //idが登録されているなら
                 favoriteImageView.setImageResource(R.drawable.ic_star_border)  //白い星マークへ変更
-                FavoriteShop.delete(id)
+                FavoriteShop.delete(shopId)
                 Log.d("test","2")
 
-
-                }else{  //お気に入り登録されてないなら
+            }else{  //お気に入り登録されてないなら
                 favoriteImageView.setImageResource(R.drawable.ic_star)  //黄色星マークへ変更
                 Log.d("test","3")
                 FavoriteShop.insert(FavoriteShop())
                 //Realmへの登録処理
                 //一覧とお気に入り画面への通知
-
+                Log.d("test",shopId +"←id表示")
+                Log.d("test",shopUrl +"←url表示")
+                Log.d("test",shopName)
             }
-
         }
     }
 
     companion object {
         private const val KEY_URL = "key_url"
-        fun start(activity: Activity, url: String) {
+        private const val KEY_ID = "key_id"
+        private const val KEY_NAME ="key_name"
+
+        fun start(activity: Activity, url:String, id:String,name:String ) {
             activity.startActivity(
                 Intent(activity, WebViewActivity::class.java)
                     .putExtra(KEY_URL, url)
-            )
+                    .putExtra(KEY_ID, id)
+                    .putExtra(KEY_NAME,name))
+
+
         }
     }
-
 }
+/*
+
+ companion object{
+        private const val KEY_SHOP = "key_shop"
+        fun start(activity: Activity,shop: Shop){
+            val favoriteShop = FavoriteShop().apply {
+                id = shop.id
+                name = shop.name
+                imageUrl = shop.logoImage
+                url = if (shop.couponUrls.sp.isNotEmpty()) shop.couponUrls.sp else shop.couponUrls.pc
+            }
+            activity.startActivity(
+                Intent(activity,WebViewActivity::class.java)
+                    .putExtra(KEY_SHOP,favoriteShop))
+        }
+
+.putExtra(KEY_ADDRESS,address)
+                    .putExtra(KEY_NAME,name)
+                    .putExtra(KEY_IMAGEURl,imageUrl)
+
+
+,address:String ,name:String, imageUrl:String
+
+var shopAddress = intent.getSerializableExtra(KEY_ADDRESS).toString()
+        var shopImageUrl = intent.getSerializableExtra(KEY_IMAGEURl).toString()
+        var shopName = intent.getSerializableExtra(KEY_NAME).toString()
+
+
+ */

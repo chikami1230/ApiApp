@@ -1,10 +1,13 @@
 package jp.techacademy.masahito.chikami.apiapp
 
+import android.util.Log
 import io.realm.Realm
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
+import java.io.Serializable
 
-open class FavoriteShop: RealmObject() {
+open class FavoriteShop: RealmObject(){
+
     @PrimaryKey
     var id: String = ""
     var imageUrl: String = ""
@@ -14,18 +17,15 @@ open class FavoriteShop: RealmObject() {
 
     companion object {
         fun findAll(): List<FavoriteShop> = // お気に入りのShopを全件取得
-            Realm.getDefaultInstance().use { realm ->
-                realm.where(FavoriteShop::class.java)
-                    .findAll().let {
+            Realm.getDefaultInstance().use {
+                    realm -> realm.where(FavoriteShop::class.java).findAll().let {
                         realm.copyFromRealm(it)
                     }
             }
 
         fun findBy(id: String): FavoriteShop? = // お気に入りされているShopをidで検索して返す。お気に入りに登録されていなければnullで返す
             Realm.getDefaultInstance().use {
-                    realm -> realm.where(FavoriteShop::class.java)
-                    .equalTo(FavoriteShop::id.name, id)
-                    .findFirst()?.let {
+                    realm -> realm.where(FavoriteShop::class.java).equalTo(FavoriteShop::id.name, id).findFirst()?.let {
                         realm.copyFromRealm(it)
                     }
             }
@@ -35,13 +35,12 @@ open class FavoriteShop: RealmObject() {
                 it.insertOrUpdate(favoriteShop)
             }
 
+
         fun delete(id: String) = // idでお気に入りから削除する
-            Realm.getDefaultInstance().use { realm ->
-                realm.where(FavoriteShop::class.java)
-                    .equalTo(FavoriteShop::id.name, id)
-                    .findFirst()?.also { deleteShop ->
-                        realm.executeTransaction {
-                            deleteShop.deleteFromRealm()
+            Realm.getDefaultInstance().use {
+                    realm -> realm.where(FavoriteShop::class.java).equalTo(FavoriteShop::id.name, id).findFirst()?.also {
+                    deleteShop -> realm.executeTransaction {
+                         deleteShop.deleteFromRealm()
                         }
                     }
             }

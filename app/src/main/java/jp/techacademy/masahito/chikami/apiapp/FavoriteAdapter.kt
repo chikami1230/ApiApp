@@ -19,8 +19,6 @@ class FavoriteAdapter(private val context: Context): RecyclerView.Adapter<Recycl
     // お気に入り画面から削除するときのコールバック（ApiFragmentへ通知するメソッド)
     var onClickDeleteFavorite: ((FavoriteShop) -> Unit)? = null
 
-
-
     // Itemを押したときのメソッド
     var onClickItem: ((String) -> Unit)? = null
 
@@ -74,8 +72,13 @@ class FavoriteAdapter(private val context: Context): RecyclerView.Adapter<Recycl
                 }
             }
             nameTextView.text = data.name
-            Picasso.get().load(data.imageUrl)
-                .into(imageView) // Picassoというライブラリを使ってImageVIewに画像をはめ込む
+
+            if (data.imageUrl.isEmpty()) {
+                imageView.setImageResource(R.drawable.ic_launcher_background);
+            } else{
+                Picasso.get().load(data.imageUrl).into(imageView);
+            }
+
             favoriteImageView.setOnClickListener {
                 onClickDeleteFavorite?.invoke(data)
                 notifyItemChanged(position)

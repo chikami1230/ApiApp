@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
+import java.net.Inet4Address
 
 class MainActivity : AppCompatActivity(), FragmentCallback {
 
@@ -30,9 +31,13 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
         }.attach()
     }
 
-    override fun onClickItem(url: String) {
-        WebViewActivity.start(this, url)
+    override fun onClickItem(url: String,  id: String, name:String) {   //クリックした時urlだけでなくお気に入りの情報も必要になった
+        WebViewActivity.start(this, url, id,name)
     }
+/*
+adress:String, name:String, imageUrl:String,
+, name, imageUrl, address
+ */
 
     override fun onAddFavorite(shop: Shop) { // Favoriteに追加するときのメソッド(Fragment -> Activity へ通知する)
         FavoriteShop.insert(FavoriteShop().apply {
