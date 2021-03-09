@@ -17,8 +17,6 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         // ViewPager2の初期化
         viewPager2.apply {
             adapter = viewPagerAdapter
@@ -80,6 +78,7 @@ adress:String, name:String, imageUrl:String,
             imageUrl = shop.logoImage
             url = if (shop.couponUrls.sp.isNotEmpty()) shop.couponUrls.sp else shop.couponUrls.pc
             address = shop.address
+            Log.d("test","新着順のリストの星タップしてお気に入り追加した")
         }
         )
         (viewPagerAdapter.fragments[VIEW_PAGER_POSITION_FAVORITE] as FavoriteFragment).updateData()
@@ -87,6 +86,7 @@ adress:String, name:String, imageUrl:String,
 
     override fun onDeleteFavorite(id: String) { // Favoriteから削除するときのメソッド(Fragment -> Activity へ通知する)
         showConfirmDeleteFavoriteDialog(id)
+        Log.d("test","新着順のリストの星タップしてお気に入り削除のアラート呼び出した")
     }
 
     private fun showConfirmDeleteFavoriteDialog(id: String) {
@@ -95,15 +95,20 @@ adress:String, name:String, imageUrl:String,
             .setMessage(R.string.delete_favorite_dialog_message)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 deleteFavorite(id)
-                Log.d("test",id + "←id表示(MainActivityのAlertDialogから)")
+                Log.d("test","アラートではいを押して削除した")
             }
-            .setNegativeButton(android.R.string.cancel) { _, _ ->}
+            .setNegativeButton(android.R.string.cancel) { _, _ ->
+                Log.d("test","アラートでいいえ押して削除するのをキャンセルした")
+            }
             .create()
             .show()
+
+
     }
 
     private fun deleteFavorite(id: String) {
         FavoriteShop.delete(id)
+        Log.d("test","削除した時呼び出される")
         (viewPagerAdapter.fragments[VIEW_PAGER_POSITION_API] as ApiFragment).updateView()
         (viewPagerAdapter.fragments[VIEW_PAGER_POSITION_FAVORITE] as FavoriteFragment).updateData()
 

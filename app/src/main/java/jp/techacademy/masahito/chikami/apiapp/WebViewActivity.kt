@@ -30,10 +30,6 @@ class WebViewActivity: AppCompatActivity() {
         Log.d("test",shopImageUrl+"←←←shopImageUrl(WebView)")
         var shopAddress = intent.getSerializableExtra(KEY_ADDRESS).toString()
         Log.d("test",shopAddress+"←←←shopAddress(WebView)")
-
-
-
-
         val isFavorite =FavoriteShop.findBy(shopId)
         Log.d("test",isFavorite.toString() +"←isFavoriteの中身")
 
@@ -48,7 +44,6 @@ class WebViewActivity: AppCompatActivity() {
                 favoriteImageView.setImageResource(R.drawable.ic_star_border)  //白い星マークへ変更
                 FavoriteShop.delete(shopId)
                 Log.d("test","2")
-
 
             }else{  //お気に入り登録されてないなら
                 favoriteImageView.setImageResource(R.drawable.ic_star)  //黄色星マークへ変更
