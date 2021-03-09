@@ -30,7 +30,7 @@ class WebViewActivity: AppCompatActivity() {
         Log.d("test",shopImageUrl+"←←←shopImageUrl(WebView)")
         var shopAddress = intent.getSerializableExtra(KEY_ADDRESS).toString()
         Log.d("test",shopAddress+"←←←shopAddress(WebView)")
-        val isFavorite =FavoriteShop.findBy(shopId)
+        var isFavorite =FavoriteShop.findBy(shopId)
         Log.d("test",isFavorite.toString() +"←isFavoriteの中身")
 
         if(isFavorite != null){      //idが登録されているなら
@@ -44,6 +44,7 @@ class WebViewActivity: AppCompatActivity() {
                 favoriteImageView.setImageResource(R.drawable.ic_star_border)  //白い星マークへ変更
                 FavoriteShop.delete(shopId)
                 Log.d("test","2")
+                isFavorite = null
 
             }else{  //お気に入り登録されてないなら
                 favoriteImageView.setImageResource(R.drawable.ic_star)  //黄色星マークへ変更
@@ -53,7 +54,9 @@ class WebViewActivity: AppCompatActivity() {
                     address = shopAddress
                     imageUrl = shopImageUrl
                     url = shopUrl
+                isFavorite = FavoriteShop.findBy(shopId)
                 })
+
                 //Realmへの登録処理
                 //一覧とお気に入り画面への通知
                 Log.d("test","3")
@@ -61,6 +64,7 @@ class WebViewActivity: AppCompatActivity() {
                 Log.d("test",shopUrl +"←url表示(WebViewで白→黄のとき)")
             }
         }
+
     }
 
     companion object {
