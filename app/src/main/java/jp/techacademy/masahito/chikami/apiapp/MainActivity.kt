@@ -17,8 +17,6 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val intent = Intent()
-        intent.action = Intent.ACTION_SEND
 
 
         // ViewPager2の初期化
@@ -39,13 +37,34 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
 
     override fun onClickItem(shop: Shop){
         val url = if(shop.couponUrls.sp.isNotEmpty()) shop.couponUrls.sp else shop.couponUrls.pc
-        WebViewActivity.start(this, url, shop.id ,shop.name, shop.address, shop.logoImage)
+        WebViewActivity.start(
+            this,
+            url,
+            shop.id,
+            shop.name,
+            shop.logoImage,
+            shop.address)
         Log.d("test",url+"←url(MainActivity)")
+        Log.d("test",shop.id+"←shop.id")
+        Log.d("test",shop.name+ "←shop.name")
+        Log.d("test",shop.address+ "←shop.address")
+        Log.d("test",shop.logoImage+"←shop.logoImage")
     }
 
     override fun onClickItem2(favoriteShop: FavoriteShop){
-        WebViewActivity.start(this,favoriteShop.url,favoriteShop.id ,favoriteShop.name,favoriteShop.imageUrl,favoriteShop.address)
-        Log.d("test",favoriteShop.id+"←id表示したい(MainActivity)")
+        WebViewActivity.start(
+            this,
+            favoriteShop.url,
+            favoriteShop.id,
+            favoriteShop.name,
+            favoriteShop.imageUrl,
+            favoriteShop.address)
+        Log.d("test",favoriteShop.url+"←favoriteShop.url(MainActivity)")
+        Log.d("test",favoriteShop.id+"←favoriteShop.id")
+        Log.d("test",favoriteShop.name+ "←favoriteShop.name")
+        Log.d("test",favoriteShop.address+ "←favoriteShop.address")
+        Log.d("test",favoriteShop.imageUrl+"favoriteShop.imageUrl")
+
     }
 
 

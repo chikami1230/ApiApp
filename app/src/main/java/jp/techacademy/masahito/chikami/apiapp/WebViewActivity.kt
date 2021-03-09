@@ -23,13 +23,13 @@ class WebViewActivity: AppCompatActivity() {
         var shopUrl = intent.getSerializableExtra(KEY_URL).toString()
         webView.loadUrl(shopUrl)
         var shopId = intent.getSerializableExtra(KEY_ID).toString()
-        Log.d("test",shopId + "←←←表示されればshopIdはid取得している")
+        Log.d("test",shopId + "←←←shopId(WebView)")
         var shopName = intent.getSerializableExtra(KEY_NAME).toString()
-        Log.d("test",shopName + "←←←表示されればshopNameはid取得している")
+        Log.d("test",shopName + "←←←shopName(WebView)")
         var shopImageUrl = intent.getSerializableExtra(KEY_IMAGEURl).toString()
-        Log.d("test",shopImageUrl)
+        Log.d("test",shopImageUrl+"←←←shopImageUrl(WebView)")
         var shopAddress = intent.getSerializableExtra(KEY_ADDRESS).toString()
-        Log.d("test",shopAddress)
+        Log.d("test",shopAddress+"←←←shopAddress(WebView)")
 
 
 
@@ -79,12 +79,13 @@ class WebViewActivity: AppCompatActivity() {
         fun start(activity: Activity, url: String, id: String, name:String, imageUrl:String, address:String) {
             activity.startActivity(
                 Intent(activity, WebViewActivity::class.java)
-                    .putExtra(KEY_URL, url)
-                    .putExtra(KEY_ID, id))  //urlとidだけだとお気に入りする情報として不十分
-                   // .putExtra(KEY_NAME,name)
-                   // .putExtra(KEY_IMAGEURl,imageUrl)
-                   // .putExtra(KEY_ADDRESS,address)
+                    .putExtra(KEY_URL, url) //urlとidだけだとお気に入りする情報として不十分
+                    .putExtra(KEY_ID,id)
+                    .putExtra(KEY_NAME,name)
+                    .putExtra(KEY_IMAGEURl,imageUrl)
+                    .putExtra(KEY_ADDRESS,address)
 
+                    )
         }
     }
 }
