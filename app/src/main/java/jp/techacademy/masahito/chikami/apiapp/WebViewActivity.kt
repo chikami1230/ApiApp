@@ -30,11 +30,12 @@ class WebViewActivity: AppCompatActivity() {
 
         var shopUrl = intent.getSerializableExtra(KEY_URL).toString()
         var shopId = intent.getSerializableExtra(KEY_ID).toString()
-
+        Log.d("test",shopId + "←←←表示されればshopIdはid取得している")
         webView.loadUrl(shopUrl)
+
         val isFavorite =FavoriteShop.findBy(shopId)
 
-        if(isFavorite != null){      //idが登録されているなら
+        if(isFavorite == null){      //idが登録されているなら
             favoriteImageView.setImageResource(R.drawable.ic_star_border)  //白い星マークへ変更
         }else {  //お気に入り登録されてないなら
             favoriteImageView.setImageResource(R.drawable.ic_star)  //黄色星マークへ変更
@@ -63,14 +64,20 @@ class WebViewActivity: AppCompatActivity() {
         private const val KEY_URL = "key_url"
         private const val KEY_ID = "key_id"
 
-        fun start(activity: Activity, url: String) {
-            activity.startActivity(Intent(activity,
-                WebViewActivity::class.java)
-                .putExtra(KEY_URL, url))
+        fun start(activity: Activity, url: String, id: String) {
+            activity.startActivity(
+                Intent(
+                    activity,
+                    WebViewActivity::class.java
+                )
+                    .putExtra(KEY_URL, url)
+                    .putExtra(KEY_ID, id))
         }
-
+    }
+}
+/*
         }
-        fun start2(activity: Activity, id:String ) {
+        fun start(activity: Activity, id:String ) {
             activity.startActivity(Intent(activity,
                 WebViewActivity::class.java)
                 .putExtra(KEY_ID, id))

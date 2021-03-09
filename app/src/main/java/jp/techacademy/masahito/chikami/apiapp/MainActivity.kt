@@ -8,7 +8,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
-import java.net.Inet4Address
 
 class MainActivity : AppCompatActivity(), FragmentCallback {
 
@@ -37,14 +36,17 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
         }.attach()
     }
 
-    override fun onClickItem(url: String){
-        WebViewActivity.start(this, url)
+
+    override fun onClickItem(shop: Shop){
+        val url = if(shop.couponUrls.sp.isNotEmpty()) shop.couponUrls.sp else shop.couponUrls.pc
+        WebViewActivity.start(this,url, shop.id)
         Log.d("test",url+"←url(MainActivity)")
     }
 
-    override fun onClickItem2(id: String){
-        WebViewActivity.start(this, id)
-        Log.d("test",id+"←id表示したい(MainActivity)")
+    override fun onClickItem2(favoriteShop: FavoriteShop){
+
+        WebViewActivity.start(this,favoriteShop.url,favoriteShop.id)
+        Log.d("test",favoriteShop.id+"←id表示したい(MainActivity)")
     }
 
 

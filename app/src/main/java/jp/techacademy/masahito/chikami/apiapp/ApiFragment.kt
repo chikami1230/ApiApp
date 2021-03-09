@@ -54,9 +54,7 @@ class ApiFragment: Fragment() {
             onClickItem = {
                 fragmentCallback?.onClickItem(it)
             }
-            onClickItem2 = {
-                fragmentCallback?.onClickItem(it)
-            }
+
         }
         // RecyclerViewの初期化
         recyclerView.apply {
