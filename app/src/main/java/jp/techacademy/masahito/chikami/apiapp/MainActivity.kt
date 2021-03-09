@@ -39,13 +39,12 @@ class MainActivity : AppCompatActivity(), FragmentCallback {
 
     override fun onClickItem(shop: Shop){
         val url = if(shop.couponUrls.sp.isNotEmpty()) shop.couponUrls.sp else shop.couponUrls.pc
-        WebViewActivity.start(this,url, shop.id)
+        WebViewActivity.start(this, url, shop.id ,shop.name, shop.address, shop.logoImage)
         Log.d("test",url+"←url(MainActivity)")
     }
 
     override fun onClickItem2(favoriteShop: FavoriteShop){
-
-        WebViewActivity.start(this,favoriteShop.url,favoriteShop.id)
+        WebViewActivity.start(this,favoriteShop.url,favoriteShop.id ,favoriteShop.name,favoriteShop.imageUrl,favoriteShop.address)
         Log.d("test",favoriteShop.id+"←id表示したい(MainActivity)")
     }
 

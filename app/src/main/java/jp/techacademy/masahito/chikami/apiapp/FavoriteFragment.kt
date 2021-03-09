@@ -48,6 +48,11 @@ class FavoriteFragment: Fragment() {
         }
         updateData()
     }
+    // webViewActivityから戻った時にも更新
+    override fun onStart() {
+        super.onStart()
+        updateData()
+    }
 
     fun updateData() {
         favoriteAdapter.refresh(FavoriteShop.findAll())

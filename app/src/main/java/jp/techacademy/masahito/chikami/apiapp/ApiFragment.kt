@@ -85,6 +85,12 @@ class ApiFragment: Fragment() {
         updateData()
     }
 
+    // webViewActivityから戻った時にも更新
+    override fun onStart() {
+        super.onStart()
+        updateData()
+    }
+
     fun updateView() { // お気に入りが削除されたときの処理（Activityからコールされる）
         recyclerView.adapter?.notifyDataSetChanged() // RecyclerViewのAdapterに対して再描画のリクエストをする
     }
